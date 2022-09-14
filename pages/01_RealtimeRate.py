@@ -20,10 +20,10 @@ new_sub_1 = '<p style="font-family:sans-serif; color:Green; font-size: 22px;">1)
 st.markdown(new_sub_1, unsafe_allow_html=True)
 
 currency_list_1 = ['USD','KRW','AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR', 'ILS', 'INR', 'ISK', 'JPY', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'RUB', 'SEK', 'SGD', 'THB', 'TRY',  'ZAR']
-currency_list_2 = ['EUR', 'USD','AUD', 'KRW', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'KRW', 'CZK', 'DKK', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR',  'INR', 'ISK', 'JPY', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'SEK', 'SGD', 'TBD', 'TRY',  'ZAR'] #'ILS', 'RUB',
+currency_list_2 = ['EUR', 'USD','AUD', 'KRW', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'KRW', 'CZK', 'DKK', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR',  'INR', 'ISK', 'JPY', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'SEK', 'SGD', 'THB', 'TRY',  'ZAR'] #'ILS', 'RUB',
 
 base_cur = st.selectbox('- Select base currency for conversion', currency_list_1)
-target_currency = st.multiselect(' - Select target currency to convert ',currency_list_2, default=['JPY','PHP','TBD'])
+target_currency = st.multiselect(' - Select target currency to convert ',currency_list_2, default=['JPY','PHP'])
 title = [ 'Base_Currency', 'Target_Currency', 'Price', 'Conversion_Date' ]  # bracket's meaning of importtance ?? 
 
 @st.cache
@@ -39,11 +39,12 @@ def load_data():
         status_code = response.status_code
         result = response.text
         data = response.json()
-        cc = [ (  data['query']['from'],  data['query']['to'],  data['info']['rate'] , data['date']    ) ]
-        print ( "cc:", cc)   
-        dfnew = pd.DataFrame( cc, columns = title ) 
-        df = df.append(  pd.DataFrame( dfnew, columns = title)  )
-    return df 
+        print(data)
+        cc = [ (  data['query']['from'],data['query']['to'],data['info']['rate'],data['date'] )]
+        print ( "cc:", cc)
+        dfnew = pd.DataFrame( cc, columns = title )
+        df = df.append( pd.DataFrame( dfnew, columns = title) )
+    return df
 
 qq=load_data()
 st.text ('-Completion of Currency conversion like below !!  ')
@@ -92,7 +93,7 @@ def currency_all():
 
 # rr.to_excel('Currency_Rate form Forex API')
 currency_all()
-# st.write ( " ( Caution: 'ILS', 'RUB' currency rate is not available )")
+# st.write ( " ( Caution: 'THB', 'RUB' currency rate is not available )")
 opt = st.radio( label = '- Select option for retriving the data', options = ['Go','Stop(Current Data Save)'] )
 st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html = True)
 
