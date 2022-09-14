@@ -34,7 +34,7 @@ def load_data():
         print("currencies:",name)
         url = ''.join(['https://api.apilayer.com/exchangerates_data/convert?to=',name,'&from=', base_cur,'&amount=','1'])
         payload = {}
-        headers= {   "apikey": "kKiUQUbkMLY59Re2a6aaqsX5jASitrdW"  }  # 최신
+        headers= {   "apikey": "ifAw0sv2rpyoZTCrFe2kKI1i9Z4wURv3"  }  # 최신
         response = requests.request("GET", url, headers=headers, data = payload)
         status_code = response.status_code
         result = response.text
@@ -44,6 +44,7 @@ def load_data():
         dfnew = pd.DataFrame( cc, columns = title ) 
         df = df.append(  pd.DataFrame( dfnew, columns = title)  )
     return df 
+
 qq=load_data()
 st.text ('-Completion of Currency conversion like below !!  ')
 st.write ( qq )
