@@ -23,7 +23,7 @@ currency_list_1 = ['USD','KRW','AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 
 currency_list_2 = ['EUR', 'USD','AUD', 'KRW', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'KRW', 'CZK', 'DKK', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR',  'INR', 'ISK', 'JPY', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'SEK', 'SGD', 'THB', 'TRY',  'ZAR'] #'ILS', 'RUB',
 
 base_cur = st.selectbox('- Select base currency for conversion', currency_list_1)
-target_currency = st.multiselect(' - Select target currency to convert ',currency_list_2, ['JPY','TBD','PHP'])
+target_currency = st.multiselect(' - Select target currency to convert ',currency_list_2, default=['JPY','TBD','PHP'])
 title = [ 'Base_Currency', 'Target_Currency', 'Price', 'Conversion_Date' ]  # bracket's meaning of importtance ?? 
 
 @st.cache
